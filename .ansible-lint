@@ -1,0 +1,4 @@
+skip_list:
+  - fqcn
+  - var-naming[no-role-prefix]
+  - no-changed-when

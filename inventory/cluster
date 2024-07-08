@@ -1,0 +1,2 @@
+[leader]
+s1 ansible_host=192.168.64.29 ansible_user=root
