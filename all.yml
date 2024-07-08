@@ -1,0 +1,6 @@
+---
+- name: Leader
+  hosts: leader
+  roles:
+    - role: preconfig
+      tags: preconfig

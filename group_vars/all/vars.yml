@@ -1,0 +1,3 @@
+database_mount_folders:
+  common: "/{{ ansible_user }}/database/common"
+  movies: "/{{ ansible_user }}/database/movies"

@@ -1,2 +1,2 @@
 [leader]
-s1 ansible_host=192.168.64.29 ansible_user=root
+s1 ansible_host=192.168.64.29 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python

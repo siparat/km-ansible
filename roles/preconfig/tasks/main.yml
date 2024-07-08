@@ -1,0 +1,97 @@
+---
+- name: Установка Docker
+  become: true
+  block:
+    - name: Установка доп. пакетов
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - python3-pip
+          - python3.12-venv
+        update_cache: true
+        state: present
+
+    - name: Создание директории для ключей с правами
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+        owner: root
+        group: root
+
+    - name: Установка ключа Docker
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        mode: "0755"
+        dest: /etc/apt/keyrings/docker.asc
+
+    - name: Выдача разрешения на чтение ключа всем пользователями
+      file:
+        path: /etc/apt/keyrings/docker.asc
+        state: file
+        mode: "0755"
+        owner: root
+        group: root
+
+    - name: Установка репозитория Docker
+      apt_repository:
+        repo: >
+          deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc]
+          https://download.docker.com/linux/ubuntu
+          {{ ansible_distribution_release }} stable
+        state: present
+        filename: docker
+        update_cache: true
+
+    - name: Установка Docker-ce
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+        update_cache: true
+
+    - name: Проверка на успешную установку Docker
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+
+    - name: Добавление в группу Docker
+      user:
+        name: "{{ ansible_user }}"
+        group: docker
+
+- name: Настройка и установка пакетов pip
+  block:
+    - name: Создание виртуальной среды python
+      command: "python3 -m venv {{ virtualenv }}"
+
+    - name: Активация виртуального окружения python
+      shell: "source /{{ ansible_user }}/.bashrc && source {{ virtualenv }}/bin/activate"
+      args:
+        executable: /bin/bash
+
+    - name: Установка пакета docker для python
+      pip:
+        name: docker
+        state: present
+        virtualenv: "{{ virtualenv }}"
+
+- name: Настройка файловой структуры
+  become: true
+  block:
+    - name: Создание папок для монтирования баз данных
+      file:
+        mode: "0644"
+        path: "{{ item.value }}"
+        state: directory
+      loop: "{{ database_mount_folders | dict2items }}"
+
+- name: Перезагрузка
+  become: true
+  reboot:
