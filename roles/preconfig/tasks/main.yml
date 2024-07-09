@@ -36,10 +36,10 @@
 
     - name: Установка репозитория Docker
       apt_repository:
-        repo: >
-          deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc]
-          https://download.docker.com/linux/ubuntu
-          {{ ansible_distribution_release }} stable
+        repo: "
+          {{ 'deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] ' +
+          'https://download.docker.com/linux/ubuntu ' +
+          ansible_distribution_release + ' stable' }}"
         state: present
         filename: docker
         update_cache: true
