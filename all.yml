@@ -4,3 +4,23 @@
   roles:
     - role: preconfig
       tags: preconfig
+    - role: swarm_init
+      tags: swarm_init
+
+- name: Managers
+  hosts: managers
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      type: manager
+      tags: swarm_join
+
+- name: Workers
+  hosts: workers
+  roles:
+    - role: preconfig
+      tags: preconfig
+    - role: swarm_join
+      type: worker
+      tags: swarm_join

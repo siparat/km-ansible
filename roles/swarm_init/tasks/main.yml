@@ -1,0 +1,12 @@
+---
+- name: Ицициализация Docker Swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ leader_ansible_host }}"
+  register: tokens
+
+- name: Установка токенов в факты
+  set_fact:
+    manager_token: "{{ tokens.swarm_facts.JoinTokens.Manager }}"
+    worker_token: "{{ tokens.swarm_facts.JoinTokens.Worker }}"
+    cacheable: true

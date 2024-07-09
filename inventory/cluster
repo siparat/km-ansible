@@ -1,2 +1,8 @@
 [leader]
 s1 ansible_host=192.168.64.29 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python
+
+[managers]
+s2 ansible_host=192.168.64.30 ansible_user=root ansible_password="{{ passwords.s2 }}" virtualenv=/etc/python
+
+[workers]
+s3 ansible_host=192.168.64.31 ansible_user=root ansible_password="{{ passwords.s3 }}" virtualenv=/etc/python

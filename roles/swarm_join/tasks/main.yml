@@ -1,0 +1,7 @@
+---
+- name: Присоединение ноды
+  community.docker.docker_swarm:
+    state: join
+    join_token: "{{ hostvars[groups['leader'][0]].ansible_facts[type + '_token'] }}"
+    remote_addrs:
+      - "{{ leader_ansible_host }}"

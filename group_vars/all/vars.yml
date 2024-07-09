@@ -1,3 +1,5 @@
 database_mount_folders:
   common: "/{{ ansible_user }}/database/common"
   movies: "/{{ ansible_user }}/database/movies"
+
+leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
