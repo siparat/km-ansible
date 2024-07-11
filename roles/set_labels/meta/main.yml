@@ -1,0 +1,6 @@
+galaxy_info:
+  role_name: set_labels
+  description: Установка ярлыков
+  author: Siparat
+  min_ansible_version: 2.15.4
+  license: MIT

@@ -1,0 +1,7 @@
+---
+- name: Добавление labels к node
+  community.docker.docker_node:
+    hostname: "{{ ansible_facts.nodename }}"
+    labels:
+      registry: "{{ hostvars[inventory_hostname].is_registry }}"
+      database: "{{ hostvars[inventory_hostname].is_database }}"
