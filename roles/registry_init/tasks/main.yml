@@ -1,0 +1,23 @@
+---
+- name: Создание директории для монтирования registry
+  file:
+    path: "{{ registry_mount_folder }}"
+    mode: "0664"
+    state: directory
+
+- name: Выкладка registry
+  community.docker.docker_swarm_service:
+    name: registry
+    publish:
+      - published_port: 5000
+        target_port: 5000
+    env:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+    mounts:
+      - type: bind
+        source: "{{ registry_mount_folder }}"
+        target: /var/lib/registry
+    placement:
+      constraints:
+        - node.labels.registry == true
+    image: registry:latest

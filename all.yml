@@ -6,6 +6,11 @@
       tags: preconfig
     - role: swarm_init
       tags: swarm_init
+    - role: set_labels
+      tags: set_labels
+    - role: registry_init
+      tags: registry_init
+
 
 - name: Managers
   hosts: managers
@@ -15,6 +20,8 @@
     - role: swarm_join
       type: manager
       tags: swarm_join
+    - role: set_labels
+      tags: set_labels
 
 - name: Workers
   hosts: workers

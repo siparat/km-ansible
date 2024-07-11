@@ -1,0 +1,6 @@
+galaxy_info:
+  role_name: registry_init
+  description: Инициализация Docker Registry
+  author: Siparat
+  min_ansible_version: 2.15.4
+  license: MIT
