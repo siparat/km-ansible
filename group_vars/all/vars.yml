@@ -3,3 +3,32 @@ database_mount_folders:
   movies: "/{{ ansible_user }}/database/movies"
 
 leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
+
+registry_host: 127.0.0.1:5000
+
+non_build_services:
+  - common_database
+  - movies_database
+
+services:
+  - name: api
+    repo: https://github.com/siparat/api.git
+    image: "{{ registry_host }}/api:latest"
+    dest: "/root/api"
+
+  - name: app
+    repo: https://github.com/siparat/app.git
+    image: "{{ registry_host }}/app:latest"
+    dest: "/root/app"
+
+  - name: bot
+    repo: https://github.com/siparat/bot.git
+    image: "{{ registry_host }}/bot:latest"
+    dest: "/root/bot"
+
+  - name: common_database
+    image: postgres:latest
+
+  - name: movies_database
+    image: postgres:latest
+  

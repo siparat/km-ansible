@@ -1,0 +1,26 @@
+---
+- name: Клонирование репозиториев
+  loop: "{{ build_services }}"
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    force: true
+    version: main
+
+- name: Сборка сервисов
+  loop: "{{ build_services }}"
+  community.docker.docker_image:
+    name: "{{ item.image }}"
+    state: present
+    source: build
+    push: true
+    force_source: true
+    force_tag: true
+    build:
+      path: "{{ item.dest }}"
+
+- name: Удаление склонированных репозиториев
+  loop: "{{ build_services }}"
+  file:
+    state: absent
+    path: "{{ item.dest }}"

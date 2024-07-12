@@ -10,6 +10,8 @@
       tags: set_labels
     - role: registry_init
       tags: registry_init
+    - role: build
+      tags: build
 
 
 - name: Managers
