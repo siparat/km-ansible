@@ -1,0 +1,25 @@
+---
+- name: "[{{ service.name }}] Конфигурация секретов"
+  vars:
+    data: "{{ lookup('template', '{{ service.name }}/.env.j2') }}"
+    name: "{{ service.name }}.env"
+  include_tasks: ../secret.yml
+
+- name: "[{{ service.name }}] Выкладка сервиса"
+  community.docker.docker_swarm_service:
+    name: "{{ service.name }}"
+    image: "{{ service.image }}"
+    force_update: true
+    mounts:
+      - type: bind
+        target: /opt/app/upload
+        source: "{{ mount_folders.upload }}"
+    secrets:
+      - secret_name: "{{ service.name }}.env"
+        filename: /opt/app/.env
+    networks:
+      - "{{ network_name }}"
+    publish:
+      - target_port: 3000
+        published_port: 3000
+        mode: ingress

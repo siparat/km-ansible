@@ -1,9 +1,13 @@
 ---
-- name: Leader
-  hosts: leader
+- name: Preconfig
+  hosts: all
   roles:
     - role: preconfig
       tags: preconfig
+
+- name: Leader
+  hosts: leader
+  roles:
     - role: swarm_init
       tags: swarm_init
     - role: set_labels
@@ -12,13 +16,12 @@
       tags: registry_init
     - role: build
       tags: build
-
+    - role: deploy
+      tags: deploy
 
 - name: Managers
   hosts: managers
   roles:
-    - role: preconfig
-      tags: preconfig
     - role: swarm_join
       type: manager
       tags: swarm_join
@@ -28,8 +31,6 @@
 - name: Workers
   hosts: workers
   roles:
-    - role: preconfig
-      tags: preconfig
     - role: swarm_join
       type: worker
       tags: swarm_join

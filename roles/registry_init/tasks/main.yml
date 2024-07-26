@@ -1,7 +1,7 @@
 ---
 - name: Создание директории для монтирования registry
   file:
-    path: "{{ registry_mount_folder }}"
+    path: "{{ mount_folders.registry }}"
     mode: "0664"
     state: directory
 
@@ -15,7 +15,7 @@
       REGISTRY_HTTP_ADDR: 0.0.0.0:5000
     mounts:
       - type: bind
-        source: "{{ registry_mount_folder }}"
+        source: "{{ mount_folders.registry }}"
         target: /var/lib/registry
     placement:
       constraints:

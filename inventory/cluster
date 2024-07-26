@@ -1,8 +1,6 @@
 [leader]
-s1 ansible_host=192.168.64.29 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python is_database=false is_registry=true
+s1 ansible_host=217.171.146.25 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python is_database=true is_registry=true
 
 [managers]
-s2 ansible_host=192.168.64.30 ansible_user=root ansible_password="{{ passwords.s2 }}" virtualenv=/etc/python is_database=true is_registry=false
 
 [workers]
-s3 ansible_host=192.168.64.31 ansible_user=root ansible_password="{{ passwords.s3 }}" virtualenv=/etc/python

@@ -1,6 +1,8 @@
-database_mount_folders:
-  common: "/{{ ansible_user }}/database/common"
-  movies: "/{{ ansible_user }}/database/movies"
+mount_folders:
+  common: /etc/database/common
+  movies: /etc/database/movies
+  upload: /etc/upload
+  registry: /etc/registry
 
 leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
 
@@ -9,20 +11,21 @@ registry_host: 127.0.0.1:5000
 non_build_services:
   - common_database
   - movies_database
+  - nginx
 
 services:
   - name: api
-    repo: https://github.com/siparat/api.git
+    repo: git@bitbucket.org:siparat/api.git
     image: "{{ registry_host }}/api:latest"
     dest: "/root/api"
 
   - name: app
-    repo: https://github.com/siparat/app.git
+    repo: git@bitbucket.org:siparat/app.git
     image: "{{ registry_host }}/app:latest"
     dest: "/root/app"
 
   - name: bot
-    repo: https://github.com/siparat/bot.git
+    repo: git@bitbucket.org:siparat/bot.git
     image: "{{ registry_host }}/bot:latest"
     dest: "/root/bot"
 
@@ -32,3 +35,5 @@ services:
   - name: movies_database
     image: postgres:latest
   
+  - name: nginx
+    image: nginx:latest

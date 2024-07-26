@@ -1,0 +1,11 @@
+---
+- name: Создание сети
+  community.docker.docker_network:
+    name: "{{ network_name }}"
+    driver: overlay
+
+- name: Выкладка сервисов
+  loop: "{{ services }}"
+  vars:
+    service: "{{ item }}"
+  include_tasks: "../services/{{ item.name }}/main.yml"

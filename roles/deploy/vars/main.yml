@@ -1,1 +1,3 @@
 ansible_python_interpreter: "{{ virtualenv }}/bin/python3"
+
+network_name: app_network

@@ -1,0 +1,6 @@
+galaxy_info:
+  role_name: deploy
+  description: Выкладка сервисов
+  author: Siparat
+  min_ansible_version: 2.15.4
+  license: MIT

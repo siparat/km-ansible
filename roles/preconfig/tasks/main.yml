@@ -8,7 +8,7 @@
           - ca-certificates
           - curl
           - python3-pip
-          - python3.12-venv
+          - python3-venv
         update_cache: true
         state: present
 
@@ -34,7 +34,7 @@
         owner: root
         group: root
 
-    - name: Установка репозитория Docker
+    - name: Установка репозитория Docker # TODO: Исправить, не работает на VPS
       apt_repository:
         repo: "
           {{ 'deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.asc] ' +
@@ -90,7 +90,7 @@
         mode: "0644"
         path: "{{ item.value }}"
         state: directory
-      loop: "{{ database_mount_folders | dict2items }}"
+      loop: "{{ mount_folders | dict2items }}"
 
 - name: Перезагрузка
   become: true

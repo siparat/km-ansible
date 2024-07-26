@@ -1,0 +1,45 @@
+---
+- name: "[{{ service.name }}] Конфигурация секретов"
+  block:
+    - vars:
+        data: "{{ lookup('template', '{{ service.name }}/nginx.conf.j2') }}"
+        name: nginx.conf
+      include_tasks: ../secret.yml
+    - vars:
+        data: "{{ lookup('template', '{{ service.name }}/502.html.j2') }}"
+        name: 502.html
+      include_tasks: ../secret.yml
+    - vars:
+        data: "{{ lookup('file', '{{ service.name }}/fullchain.pem') }}"
+        name: fullchain.pem
+      include_tasks: ../secret.yml
+    - vars:
+        data: "{{ lookup('file', '{{ service.name }}/privkey.pem') }}"
+        name: privkey.pem
+      include_tasks: ../secret.yml
+
+- name: "[{{ service.name }}] Выкладка сервиса"
+  community.docker.docker_swarm_service:
+    name: "{{ service.name }}"
+    image: "{{ service.image }}"
+    secrets:
+      - secret_name: nginx.conf
+        filename: /etc/nginx/nginx.conf
+      - secret_name: 502.html
+        filename: /var/www/errors/502.html
+      - secret_name: fullchain.pem
+        filename: "/etc/letsencrypt/live/{{ env.domain }}/fullchain.pem"
+      - secret_name: privkey.pem
+        filename: "/etc/letsencrypt/live/{{ env.domain }}/privkey.pem"
+    networks:
+      - "{{ network_name }}"
+    publish:
+      - target_port: 2002
+        published_port: 2002
+        mode: ingress
+      - target_port: 80
+        published_port: 80
+        mode: ingress
+      - target_port: 443
+        published_port: 443
+        mode: ingress
