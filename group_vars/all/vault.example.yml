@@ -1,0 +1,33 @@
+passwords:
+  s1: string
+
+env:
+  wss_host: wss://domain.ru
+  https_host: https://domain.ru
+  domain: domain.ru
+
+  email_support: example@email.com
+  email_report: example@email.com
+
+  common_db:
+    user: string
+    password: string
+    host: string
+    port: 5432
+    database: string
+  movies_db:
+    user: string
+    password: string
+    host: string
+    port: 5432
+    database: string
+  api:
+    access_token: string
+    refresh_token: string
+    smpt_pass: string
+    smpt_user: string
+  app:
+    captcha_key: string
+    ym_account_id: 1234
+  bot:
+    token: token

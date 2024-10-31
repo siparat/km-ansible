@@ -1,5 +1,5 @@
 [leader]
-s1 ansible_host=121.127.37.163 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python is_database=true is_registry=true
+s1 ansible_host=46.253.143.132 ansible_user=root ansible_password="{{ passwords.s1 }}" virtualenv=/etc/python is_database=true is_registry=true
 
 [managers]
 
