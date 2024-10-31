@@ -30,10 +30,10 @@ services:
     dest: "/root/bot"
 
   - name: common_database
-    image: postgres:latest
+    image: postgres:16
 
   - name: movies_database
-    image: postgres:latest
+    image: postgres:16
   
   - name: nginx
     image: nginx:latest

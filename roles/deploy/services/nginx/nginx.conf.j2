@@ -48,6 +48,12 @@ http {
 			proxy_set_header Connection "upgrade";
 		}
 
+		error_page 502 /502.html;
+
+		location /502.html {
+			root /var/www/errors;
+			internal;
+		}
 	}
 }
 
