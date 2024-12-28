@@ -22,6 +22,10 @@
   community.docker.docker_swarm_service:
     name: "{{ service.name }}"
     image: "{{ service.image }}"
+    mounts:
+      - type: bind
+        target: /etc/posters
+        source: "{{ mount_folders.posters }}"
     secrets:
       - secret_name: nginx.conf
         filename: /etc/nginx/nginx.conf

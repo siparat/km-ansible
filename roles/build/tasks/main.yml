@@ -11,6 +11,7 @@
   template:
     src: "../../deploy/services/{{ item.name }}/.env.j2"
     dest: "{{ item.dest }}/.env.production"
+    mode: "0755"
   loop: "{{ build_services }}"
   when: item.name == 'app'
 

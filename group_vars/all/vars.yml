@@ -3,6 +3,7 @@ mount_folders:
   movies: /etc/database/movies
   upload: /etc/upload
   registry: /etc/registry
+  posters: /etc/posters
 
 leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
 
