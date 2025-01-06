@@ -29,5 +29,6 @@ env:
   app:
     captcha_key: string
     ym_account_id: 1234
+    vibix_token: string
   bot:
     token: token
