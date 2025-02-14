@@ -30,5 +30,7 @@ env:
     captcha_key: string
     ym_account_id: 1234
     vibix_token: string
+    collaps_token: string
+    alloha_token: string
   bot:
     token: token
