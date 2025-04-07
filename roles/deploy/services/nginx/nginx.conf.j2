@@ -8,19 +8,11 @@ http {
 	}
 
 	server {
-		listen 80;
-		server_name {{ env.domain }};
-
-		return 301 {{ env.https_host }}$request_uri;
-	}
-
-	server {
 		listen 443 ssl;
-
 		server_name {{ env.domain }};
+
 		ssl_certificate /etc/letsencrypt/live/{{ env.domain }}/fullchain.pem;
 		ssl_certificate_key /etc/letsencrypt/live/{{ env.domain }}/privkey.pem;
-
 
 		location /upload/posters/ {
 			alias /etc/posters/;
@@ -54,6 +46,28 @@ http {
 			root /var/www/errors;
 			internal;
 		}
+	}
+
+	server {
+		listen 4000;
+
+		return 301 {{ env.https_host }}$request_uri;
+	}
+
+	server {
+		listen 80;
+
+		return 301 {{ env.https_host }}$request_uri;
+	}
+
+	server {
+		listen 443 ssl;
+		server_name kinmov.ru;
+
+		ssl_certificate /etc/letsencrypt/live/kinmov.ru/fullchain.pem;
+		ssl_certificate_key /etc/letsencrypt/live/kinmov.ru/privkey.pem;
+
+		return 301 {{ env.https_host }}$request_uri;
 	}
 }
 
