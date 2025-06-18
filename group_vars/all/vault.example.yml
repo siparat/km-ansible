@@ -32,5 +32,6 @@ env:
     vibix_token: string
     collaps_token: string
     alloha_token: string
+    veo_token: string
   bot:
     token: token
