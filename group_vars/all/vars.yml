@@ -16,12 +16,12 @@ non_build_services:
 
 services:
   - name: api
-    repo: git@bitbucket.org:siparat/api.git
+    repo: git@github.com:ClintEastwood86/km_old_api.git
     image: "{{ registry_host }}/api:latest"
     dest: "/root/api"
 
   - name: app
-    repo: git@bitbucket.org:siparat/app.git
+    repo: git@github.com:ClintEastwood86/km_old_app.git
     image: "{{ registry_host }}/app:latest"
     dest: "/root/app"
 
