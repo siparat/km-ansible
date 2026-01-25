@@ -4,6 +4,7 @@ mount_folders:
   upload: /etc/upload
   registry: /etc/registry
   posters: /etc/posters
+  grafana: /etc/grafana
 
 leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
 
@@ -13,28 +14,32 @@ non_build_services:
   - common_database
   - movies_database
   - nginx
+  - grafana
 
 services:
-  - name: api
-    repo: git@github.com:ClintEastwood86/km_old_api.git
-    image: "{{ registry_host }}/api:latest"
-    dest: "/root/api"
+  # - name: api
+  #   repo: git@github.com:ClintEastwood86/km_old_api.git
+  #   image: "{{ registry_host }}/api:latest"
+  #   dest: "/root/api"
 
-  - name: app
-    repo: git@github.com:ClintEastwood86/km_old_app.git
-    image: "{{ registry_host }}/app:latest"
-    dest: "/root/app"
+  # - name: app
+  #   repo: git@github.com:ClintEastwood86/km_old_app.git
+  #   image: "{{ registry_host }}/app:latest"
+  #   dest: "/root/app"
 
-  - name: bot
-    repo: git@bitbucket.org:siparat/bot.git
-    image: "{{ registry_host }}/bot:latest"
-    dest: "/root/bot"
+  # - name: bot
+  #   repo: git@bitbucket.org:siparat/bot.git
+  #   image: "{{ registry_host }}/bot:latest"
+  #   dest: "/root/bot"
 
-  - name: common_database
-    image: postgres:16
+  # - name: common_database
+  #   image: postgres:16
 
-  - name: movies_database
-    image: postgres:16
+  # - name: movies_database
+  #   image: postgres:16
   
   - name: nginx
     image: nginx:latest
+  
+  - name: grafana
+    image: grafana/grafana:latest

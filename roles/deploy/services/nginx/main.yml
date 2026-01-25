@@ -18,13 +18,14 @@
         name: privkey.pem
       include_tasks: ../secret.yml
     - vars:
-        data: "{{ lookup('file', '{{ service.name }}/kinmov.fullchain.pem') }}"
-        name: kinmov.fullchain.pem
+        data: "{{ lookup('file', '{{ service.name }}/grafana.fullchain.pem') }}"
+        name: grafana.fullchain.pem
       include_tasks: ../secret.yml
     - vars:
-        data: "{{ lookup('file', '{{ service.name }}/kinmov.privkey.pem') }}"
-        name: kinmov.privkey.pem
+        data: "{{ lookup('file', '{{ service.name }}/grafana.privkey.pem') }}"
+        name: grafana.privkey.pem
       include_tasks: ../secret.yml
+
 
 - name: "[{{ service.name }}] Выкладка сервиса"
   community.docker.docker_swarm_service:
@@ -43,10 +44,10 @@
         filename: "/etc/letsencrypt/live/{{ env.domain }}/fullchain.pem"
       - secret_name: privkey.pem
         filename: "/etc/letsencrypt/live/{{ env.domain }}/privkey.pem"
-      - secret_name: kinmov.fullchain.pem
-        filename: "/etc/letsencrypt/live/kinmov.ru/fullchain.pem"
-      - secret_name: kinmov.privkey.pem
-        filename: "/etc/letsencrypt/live/kinmov.ru/privkey.pem"
+      - secret_name: grafana.fullchain.pem
+        filename: "/etc/letsencrypt/live/grafana.{{ env.domain }}/fullchain.pem"
+      - secret_name: grafana.privkey.pem
+        filename: "/etc/letsencrypt/live/grafana.{{ env.domain }}/privkey.pem"
     networks:
       - "{{ network_name }}"
     publish:

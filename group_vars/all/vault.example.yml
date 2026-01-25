@@ -36,3 +36,6 @@ env:
     veo_token: string
   bot:
     token: token
+  grafana:
+    user: string
+    password: string

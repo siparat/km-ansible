@@ -90,10 +90,17 @@
   block:
     - name: Создание папок для монтирования баз данных
       file:
-        mode: "0644"
+        mode: "0755"
         path: "{{ item.value }}"
         state: directory
       loop: "{{ mount_folders | dict2items }}"
+
+    - name: Настройка прав для Grafana
+      file:
+        path: "{{ mount_folders.grafana }}"
+        owner: "472"
+        group: "472"
+        recurse: true
 
 - name: Перезагрузка
   become: true

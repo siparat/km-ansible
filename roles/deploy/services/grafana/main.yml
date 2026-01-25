@@ -1,0 +1,22 @@
+---
+- name: "[{{ service.name }}] Выкладка сервиса"
+  community.docker.docker_swarm_service:
+    name: "{{ service.name }}"
+    image: "{{ service.image }}"
+    force_update: true
+    mounts:
+      - type: bind
+        target: /var/lib/grafana
+        source: "{{ mount_folders.grafana }}"
+    placement:
+      constraints:
+        - node.labels.database == true
+    networks:
+      - "{{ network_name }}"
+    publish:
+      - target_port: 3000
+        published_port: 3030
+        mode: ingress
+    env:
+      GF_SECURITY_ADMIN_USER: "{{ env.grafana.user }}"
+      GF_SECURITY_ADMIN_PASSWORD: "{{ env.grafana.password }}"
