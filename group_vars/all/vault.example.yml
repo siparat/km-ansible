@@ -26,6 +26,7 @@ env:
     refresh_token: string
     smpt_pass: string
     smpt_user: string
+    sentry_dsn: string
   app:
     captcha_key: string
     ym_account_id: 1234
