@@ -1,0 +1,26 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: 'telegram'
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 30m
+
+receivers:
+  - name: 'telegram'
+    telegram_configs:
+      - bot_token: "{{ env.health_bot.token }}"
+        chat_id: "{{ env.health_bot.chat_id }}"
+        message_thread_id: "{{ env.health_bot.message_thread_id }}"
+        parse_mode: 'Markdown'
+        message: |
+          {% raw %}
+          🚨 *ВНИМАНИЕ! Сбой API:*
+          🕑 {{ range .Alerts }}{{ .StartsAt.Format "2006-01-02 15:04:05" }}{{ end }}
+          Мониторинг зафиксировал проблему уровня `{{ .CommonLabels.severity }}`
+
+          *{{ .CommonAnnotations.summary }}*
+          ```Описание {{ .CommonAnnotations.description }}```
+          {% endraw %}
+          {{ env.health_bot.admin }}

@@ -36,6 +36,11 @@ env:
     veo_token: string
   bot:
     token: token
+  health_bot:
+    token: token
+    message_thread_id: 9
+    chat_id: -1003588090545
+    admin: "@siparat"
   grafana:
     user: string
     password: string

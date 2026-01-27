@@ -15,6 +15,7 @@ non_build_services:
   - movies_database
   - nginx
   - grafana
+  - alertmanager
 
 services:
   # - name: api
@@ -38,8 +39,11 @@ services:
   # - name: movies_database
   #   image: postgres:16
   
-  - name: nginx
-    image: nginx:latest
+  # - name: nginx
+  #   image: nginx:latest
   
-  - name: grafana
-    image: grafana/grafana:latest
+  # - name: grafana
+  #   image: grafana/grafana:latest
+
+  - name: alertmanager
+    image: prom/alertmanager:latest
