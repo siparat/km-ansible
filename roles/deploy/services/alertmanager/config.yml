@@ -11,8 +11,8 @@ receivers:
   - name: 'telegram'
     telegram_configs:
       - bot_token: "{{ env.health_bot.token }}"
-        chat_id: "{{ env.health_bot.chat_id }}"
-        message_thread_id: "{{ env.health_bot.message_thread_id }}"
+        chat_id: {{ env.health_bot.chat_id }}
+        message_thread_id: {{ env.health_bot.message_thread_id }}
         parse_mode: 'Markdown'
         message: |
           {% raw %}
@@ -23,4 +23,5 @@ receivers:
           *{{ .CommonAnnotations.summary }}*
           ```Описание {{ .CommonAnnotations.description }}```
           {% endraw %}
+          
           {{ env.health_bot.admin }}

@@ -17,6 +17,8 @@
     secrets:
       - secret_name: "{{ service.name }}.env"
         filename: /opt/app/.env
+    healthcheck:
+      test: ["NONE"]
     networks:
       - "{{ network_name }}"
     publish:

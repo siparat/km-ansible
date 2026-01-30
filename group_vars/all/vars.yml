@@ -16,34 +16,38 @@ non_build_services:
   - nginx
   - grafana
   - alertmanager
+  - prometheus
 
 services:
-  # - name: api
-  #   repo: git@github.com:ClintEastwood86/km_old_api.git
-  #   image: "{{ registry_host }}/api:latest"
-  #   dest: "/root/api"
+  - name: api
+    repo: git@github.com:ClintEastwood86/km_old_api.git
+    image: "{{ registry_host }}/api:latest"
+    dest: "/root/api"
 
-  # - name: app
-  #   repo: git@github.com:ClintEastwood86/km_old_app.git
-  #   image: "{{ registry_host }}/app:latest"
-  #   dest: "/root/app"
+  - name: app
+    repo: git@github.com:ClintEastwood86/km_old_app.git
+    image: "{{ registry_host }}/app:latest"
+    dest: "/root/app"
 
-  # - name: bot
-  #   repo: git@bitbucket.org:siparat/bot.git
-  #   image: "{{ registry_host }}/bot:latest"
-  #   dest: "/root/bot"
+  - name: bot
+    repo: https://github.com/ClintEastwood86/km-bot
+    image: "{{ registry_host }}/bot:latest"
+    dest: "/root/bot"
 
-  # - name: common_database
-  #   image: postgres:16
+  - name: common_database
+    image: postgres:16
 
-  # - name: movies_database
-  #   image: postgres:16
+  - name: movies_database
+    image: postgres:16
   
-  # - name: nginx
-  #   image: nginx:latest
+  - name: nginx
+    image: nginx:latest
   
-  # - name: grafana
-  #   image: grafana/grafana:latest
+  - name: grafana
+    image: grafana/grafana:latest
 
   - name: alertmanager
     image: prom/alertmanager:latest
+
+  - name: prometheus
+    image: prom/prometheus:latest

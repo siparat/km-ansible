@@ -4,6 +4,7 @@
     name: "{{ service.name }}"
     image: "{{ service.image }}"
     force_update: true
+    user: "472"
     mounts:
       - type: bind
         target: /var/lib/grafana
