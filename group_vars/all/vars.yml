@@ -5,6 +5,7 @@ mount_folders:
   registry: /etc/registry
   posters: /etc/posters
   grafana: /etc/grafana
+  loki: /etc/loki_data
 
 leader_ansible_host: "{{ hostvars[groups['leader'][0]].ansible_host }}"
 
@@ -17,6 +18,8 @@ non_build_services:
   - grafana
   - alertmanager
   - prometheus
+  - loki
+  - promtail
 
 services:
   - name: api
@@ -51,3 +54,9 @@ services:
 
   - name: prometheus
     image: prom/prometheus:latest
+
+  - name: loki
+    image: grafana/loki:latest
+  
+  - name: promtail
+    image: grafana/promtail:latest

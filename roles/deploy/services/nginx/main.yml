@@ -45,9 +45,9 @@
       - secret_name: privkey.pem
         filename: "/etc/letsencrypt/live/{{ env.domain }}/privkey.pem"
       - secret_name: grafana.fullchain.pem
-        filename: "/etc/letsencrypt/live/grafana.{{ env.domain }}/fullchain.pem"
+        filename: "/etc/letsencrypt/live/{{ env.grafana_domain }}/fullchain.pem"
       - secret_name: grafana.privkey.pem
-        filename: "/etc/letsencrypt/live/grafana.{{ env.domain }}/privkey.pem"
+        filename: "/etc/letsencrypt/live/{{ env.grafana_domain }}/privkey.pem"
     networks:
       - "{{ network_name }}"
     publish:
