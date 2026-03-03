@@ -62,6 +62,13 @@ http {
 
 	server {
 		listen 80;
+		server_name {{ env.domain }};
+
+		return 301 {{ env.https_host }}$request_uri;
+	}
+
+	server {
+		listen 80;
 		server_name {{ env.grafana_domain }};
 
 		return 301 {{ env.grafana_https_host }}$request_uri;
@@ -85,12 +92,6 @@ http {
 
 	server {
 		listen 4000;
-
-		return 301 {{ env.https_host }}$request_uri;
-	}
-
-	server {
-		listen 80;
 
 		return 301 {{ env.https_host }}$request_uri;
 	}

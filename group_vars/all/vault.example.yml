@@ -37,6 +37,7 @@ env:
     collaps_token: string
     alloha_token: string
     veo_token: string
+    fonbet_link: string
   bot:
     token: token
   health_bot:
