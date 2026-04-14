@@ -17,14 +17,6 @@
         data: "{{ lookup('file', '{{ service.name }}/privkey.pem') }}"
         name: privkey.pem
       include_tasks: ../secret.yml
-    - vars:
-        data: "{{ lookup('file', '{{ service.name }}/grafana.fullchain.pem') }}"
-        name: grafana.fullchain.pem
-      include_tasks: ../secret.yml
-    - vars:
-        data: "{{ lookup('file', '{{ service.name }}/grafana.privkey.pem') }}"
-        name: grafana.privkey.pem
-      include_tasks: ../secret.yml
 
 
 - name: "[{{ service.name }}] Выкладка сервиса"
@@ -44,10 +36,6 @@
         filename: "/etc/letsencrypt/live/{{ env.domain }}/fullchain.pem"
       - secret_name: privkey.pem
         filename: "/etc/letsencrypt/live/{{ env.domain }}/privkey.pem"
-      - secret_name: grafana.fullchain.pem
-        filename: "/etc/letsencrypt/live/{{ env.grafana_domain }}/fullchain.pem"
-      - secret_name: grafana.privkey.pem
-        filename: "/etc/letsencrypt/live/{{ env.grafana_domain }}/privkey.pem"
     networks:
       - "{{ network_name }}"
     publish:

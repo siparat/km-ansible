@@ -1,0 +1,14 @@
+---
+- name: "[{{ service.name }}] Выкладка сервиса"
+  community.docker.docker_swarm_service:
+    name: "{{ service.name }}"
+    image: "{{ service.image }}"
+    command: "redis-server --requirepass {{ env.redis.password }}"
+    publish:
+      - published_port: 6379
+        target_port: 6379
+    networks:
+      - "{{ network_name }}"
+    placement:
+      constraints:
+        - node.labels.database == true

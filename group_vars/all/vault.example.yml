@@ -6,9 +6,6 @@ env:
   https_host: https://domain.ru
   domain: domain.ru
 
-  grafana_https_host: https://grafana.domain.ru
-  grafana_domain: grafana.domain.ru
-
   email_support: example@email.com
   email_report: example@email.com
 
@@ -24,6 +21,10 @@ env:
     host: string
     port: 5432
     database: string
+  redis:
+    password: string
+    port: 6379
+    host: string
   api:
     access_token: string
     refresh_token: string

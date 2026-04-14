@@ -15,11 +15,7 @@ non_build_services:
   - common_database
   - movies_database
   - nginx
-  - grafana
-  - alertmanager
-  - prometheus
-  - loki
-  - promtail
+  - redis
 
 services:
   - name: api
@@ -46,17 +42,5 @@ services:
   - name: nginx
     image: nginx:latest
   
-  - name: grafana
-    image: grafana/grafana:latest
-
-  - name: alertmanager
-    image: prom/alertmanager:latest
-
-  - name: prometheus
-    image: prom/prometheus:latest
-
-  - name: loki
-    image: grafana/loki:latest
-  
-  - name: promtail
-    image: grafana/promtail:latest
+  - name: redis
+    image: redis:7
