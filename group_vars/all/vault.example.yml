@@ -9,6 +9,8 @@ env:
   email_support: example@email.com
   email_report: example@email.com
 
+  http_proxy: http://user:pass@host:port
+
   common_db:
     user: string
     password: string
@@ -31,6 +33,9 @@ env:
     smpt_pass: string
     smpt_user: string
     sentry_dsn: string
+    telegram_bot_token: string
+    telegram_chat_id: "-1000000000000"
+    telegram_feedback_topic_id: 40
   app:
     captcha_key: string
     ym_account_id: 1234

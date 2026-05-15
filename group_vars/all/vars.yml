@@ -38,9 +38,9 @@ services:
 
   - name: movies_database
     image: postgres:16
-  
+
   - name: nginx
     image: nginx:latest
-  
+
   - name: redis
     image: redis:7
