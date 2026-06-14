@@ -36,6 +36,8 @@ env:
     telegram_bot_token: string
     telegram_chat_id: "-1000000000000"
     telegram_feedback_topic_id: 40
+    limit_collections_in_account: 100
+    limit_movies_in_collection: 250
   app:
     captcha_key: string
     ym_account_id: 1234
